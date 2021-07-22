@@ -20,7 +20,7 @@ z_ref = 1.96
 @argument("r", type=int, description="Little position offset")
 @argument("l", type=int, description="Number of bits for decimal conversion")
 @argument("cnt", type=int, description="Number of PRNs to generate")
-def test(seed: int = SEED_DEFAULT, q: int = 31, r: int = 5, l: int = 20, cnt: int = 10000):
+def test(seed: int = SEED_DEFAULT, q: int = 31, r: int = 10, l: int = 20, cnt: int = 10000):
     """
     Generate a series of PRNs using Tausworthe PRN generator. Test the result for independence and goodness-of-fit
     """

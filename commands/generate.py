@@ -14,7 +14,7 @@ SEED_DEFAULT = perf_counter_ns()
 @argument("r", type=int, description="Little position offset")
 @argument("l", type=int, description="Number of bits for decimal conversion")
 @argument("cnt", type=int, description="Number of PRNs to generate")
-def generate(seed: int = SEED_DEFAULT, q: int = 31, r: int = 5, l: int = 10, cnt: int = 10):
+def generate(seed: int = SEED_DEFAULT, q: int = 31, r: int = 10, l: int = 20, cnt: int = 10):
     """
     Generate a PRN using Tausworthe PRN generator
     """
