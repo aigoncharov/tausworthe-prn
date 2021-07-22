@@ -4,7 +4,7 @@ from bitarray import bitarray
 from bitarray.util import int2ba, ba2int
 from tausworthe import TausworthePRN
 import matplotlib.pyplot as plt
-from numpy import histogram, sqrt
+from numpy import cos, histogram, log, pi, sin, sqrt
 
 
 SEED_DEFAULT = 42424242424242
@@ -56,7 +56,7 @@ def test(seed: int = SEED_DEFAULT, q: int = 31, r: int = 5, l: int = 20, cnt: in
 
     fig1.savefig("PRNs-{}-{}-{}-{}.png".format(cnt, q, r, l))
     plt.close(fig1)
-    print("Printed a graph\n")
+    print("Printed a scatter graph for PRNs\n")
 
     print("Running goodness-of-fit test with {} cells\n".format(k))
     ei = cnt / k
@@ -95,3 +95,18 @@ def test(seed: int = SEED_DEFAULT, q: int = 31, r: int = 5, l: int = 20, cnt: in
         print("Independence test failed\n")
         return 0
     print("Independence test passed\n")
+
+    print("Generating normals using Box-Muller method\n")
+    z1 = [sqrt(-2*log(xi))*cos(2*pi*y[i]) for i, xi in enumerate(x)]
+    z2 = [sqrt(-2*log(xi))*sin(2*pi*y[i]) for i, xi in enumerate(x)]
+
+    for i, z in enumerate([z1, z2]):
+        fig_hist, ax_z = plt.subplots(figsize=(16, 16))
+
+        ax_z.hist(z, bins=30)
+
+        ax_z.set_title("Nor(0, 1) deviates (Z{})\n".format(i + 1))
+
+        fig_hist.savefig("z{}-{}-{}-{}-{}.png".format(i + 1, cnt, q, r, l))
+        plt.close(fig_hist)
+    print("Printed histograms for Nor deviates\n")
